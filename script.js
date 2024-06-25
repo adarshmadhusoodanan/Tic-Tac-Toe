@@ -47,7 +47,8 @@ function startGame() {
         cell.classList.remove(X_CLASS);  // removing X and O from each cell
         cell.classList.remove(O_CLASS); 
 
-        cell.textContent = '';   // Clearing the text content
+        cell.style.backgroundColor = ''; // Reset cell bg color
+        cell.textContent = '';   // Clearing text content
 
         cell.removeEventListener('click', handleClick);  // remove existing event listener
         cell.addEventListener('click', handleClick, { once: true });  // add click e listener
@@ -90,12 +91,25 @@ function endGame(draw) {
         statusDisplay.innerText = "Draw!";
     } else {
         statusDisplay.innerText = `Player ${oTurn ? "O" : "X"} Wins!`;
+            // Change bg color of winning cells
+        const winningCombination = getWinningCombination(oTurn ? O_CLASS : X_CLASS);
+        winningCombination.forEach(index => {
+            cells[index].style.backgroundColor = 'black';
+        });
     }
     cells.forEach(cell => {
         cell.removeEventListener('click', handleClick); // remove event listener from cells
     });
 }
 
+//  get the winning combination indices
+function getWinningCombination(currentClass) {
+    return WINNING_COMBINATIONS.find(combination => {
+        return combination.every(index => {
+            return cells[index].classList.contains(currentClass); // Find the winning combination
+        });
+    });
+}
 
 // check game is draw or not
 function isDraw() {

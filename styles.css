@@ -12,14 +12,22 @@ body {
 
 .game {
     text-align: center;
+    
     background: rgb(0, 0, 0);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgb(255, 6, 6);
 }
+.game h1{
+
+    font-size: 3rem;
+
+}
 
 .board {
     display: grid;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     gap: 10px;
@@ -32,6 +40,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
     background: #ff0000;
     color: rgb(255, 255, 255);
     font-size: 5em;
@@ -47,7 +56,7 @@ body {
 }
 
 .status {
-    font-size: 1.2em;
+    font-size: 2em;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: #ffffff;
     margin-bottom: 20px;
@@ -72,3 +81,34 @@ button:hover {
     transition: .5s;
 }
 
+@media (max-width:991px) {
+    html{
+        font-size:75%;
+    
+    }
+
+
+   body{
+        padding: 2rem;
+    }
+}
+
+@media (max-width:768px){
+    .game h1{
+        font-size: 2em;
+    }
+    body{
+        padding: 2rem;
+    }
+    .game .board{
+      
+        grid-template-columns: repeat(3, 90px);
+        grid-template-rows: repeat(3, 90px);
+
+    }
+    .game .board .cell{
+        width: 90px;
+        height: 90px;
+    }
+
+}
