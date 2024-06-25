@@ -47,13 +47,14 @@ function startGame() {
         cell.classList.remove(X_CLASS);  // removing X and O from each cell
         cell.classList.remove(O_CLASS); 
 
+
         cell.style.backgroundColor = ''; // Reset cell bg color
         cell.textContent = '';   // Clearing text content
 
         cell.removeEventListener('click', handleClick);  // remove existing event listener
         cell.addEventListener('click', handleClick, { once: true });  // add click e listener
     });
-
+    statusDisplay.style.color = '';
     setBoardHoverClass(); // set hover for the turns
     statusDisplay.innerText = `Player ${oTurn ? "O" : "X"}'s turn`; //update the status and display
 }
@@ -89,12 +90,14 @@ function handleClick(e) {
 function endGame(draw) {
     if (draw) {
         statusDisplay.innerText = "Draw!";
+        statusDisplay.style.color = 'red'
     } else {
+        statusDisplay.style.color = 'green'
         statusDisplay.innerText = `Player ${oTurn ? "O" : "X"} Wins!`;
             // Change bg color of winning cells
         const winningCombination = getWinningCombination(oTurn ? O_CLASS : X_CLASS);
         winningCombination.forEach(index => {
-            cells[index].style.backgroundColor = 'black';
+            cells[index].style.backgroundColor = 'green';
         });
     }
     cells.forEach(cell => {
